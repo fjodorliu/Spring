@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?> <!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<log4j:configuration xmlns:log4j='http://jakarta.apache.org/log4j/'>
+	<appender name="dailyRollingFile" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="Threshold" value="info"></param>
+		<param name="ImmediateFlush" value="true"></param>
+		<param name="File" value="restServer.log"></param>
+		<param name="DatePattern" value="'.'yyyy-MM-dd'.log'"></param>
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss\} %-5p] [%t] {%c:%L}-%m%n"></param>
+		</layout>
+	</appender>
+	
+	<appender name="auditLog" class="org.apache.log4j.RollingFileAppender">  
+      <param name="File" value="producer-audit.log"/>
+      <param name="MaxFileSize" value="2MB"/>
+      <param name="MaxBackupIndex" value="2"/>  
+      <param name="Append" value="false"/> 
+      <layout class="org.apache.log4j.PatternLayout">  
+        <param name="ConversionPattern" value="%p %d - %m%n"/>  
+      </layout>  
+    </appender> 
+	
+	<appender name="consoleAppender" class="org.apache.log4j.ConsoleAppender">
+	    <param name="Target" value="System.out"/>
+		<layout class="org.apache.log4j.PatternLayout">
+			<!-- <param name="ConversionPattern" value="[TTT] [%d{yyyy-MM-dd HH:mm:ss\} %-5p] [%t] {%c:%L} - %m%n"></param> -->
+			<!-- <param name="ConversionPattern" value="[TTT] %d{yyyy-MM-dd'T'HH:mm:ss.SSSZ} [%thread] %-5level %X{USER} %X{METHOD} %X{URI} %class{36}:%L %msg%n"></param> -->
+			<param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss} # %-5p # %X{USER} # %X{METHOD} # %X{URI} # [%c{1}] # %m%n"></param>
+		</layout>
+	</appender>
+	
+	<root>
+		<priority value="debug" />
+		<appender-ref ref="consoleAppender" />
+		<appender-ref ref="dailyRollingFile" />
+	</root>
+	
+	<category name="org.springframework">
+		<priority value="error" />
+		<appender-ref ref="dailyRollingFile" />
+	</category>
+</log4j:configuration>
