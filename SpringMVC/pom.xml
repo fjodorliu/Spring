@@ -3,7 +3,7 @@
 
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.fjodor.spring</groupId>
-	<artifactId>spring-mvc</artifactId>
+	<artifactId>SpringMVC</artifactId>
 	<name>Spring MVC implementation with traditional way</name>
 
 	<parent>
